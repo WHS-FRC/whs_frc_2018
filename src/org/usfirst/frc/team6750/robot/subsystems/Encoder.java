@@ -13,6 +13,11 @@ import java.util.*;
  *
  */
 public class Encoder {
+	/**
+	 * The wheel circumference in inches
+	 */
+	public static final double WHEEL_CIRCUMFERENCE = 6D * Math.PI;
+	
 	public final Drivetrain drivetrain;
 
 	private final List<Counter> counters;
@@ -70,6 +75,15 @@ public class Encoder {
 
 		public void setToRemove() {
 			remove = true;
+		}
+		
+		/**
+		 * Returns the distance recorded by the counter in inches
+		 * 
+		 * @return distance in inches
+		 */
+		public double getDistance() {
+			return rotations * WHEEL_CIRCUMFERENCE;
 		}
 	}
 }
