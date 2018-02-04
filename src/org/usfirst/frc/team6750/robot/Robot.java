@@ -7,13 +7,11 @@
 
 package org.usfirst.frc.team6750.robot;
 
-import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team6750.robot.commands.ExampleCommand;
-import org.usfirst.frc.team6750.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team6750.robot.commands.*;
+import org.usfirst.frc.team6750.robot.subsystems.*;
+
+import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.command.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,13 +23,12 @@ import org.usfirst.frc.team6750.robot.subsystems.ExampleSubsystem;
 public class Robot extends TimedRobot {
 	public static final ExampleSubsystem kExampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
+	public static Commands commands;
 
-	private Command autonomousCommand;
-	
 	/**
-	 * Presents a menu to the driver station that contains various commands
+	 * Presents a menu to the driver station that contains various commandChooser
 	 */
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	public static CommandChooser commandChooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -40,9 +37,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		chooser.addDefault("Default Auto", new ExampleCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
+		commands = new Commands();
+		commandChooser = new CommandChooser();
 	}
 
 	/**
@@ -56,7 +52,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledPeriodic() {
-		Scheduler.getInstance().run();
+		periodic();
 	}
 
 	/**
@@ -67,25 +63,13 @@ public class Robot extends TimedRobot {
 	 * getString code to get the auto name from the text box below the Gyro
 	 *
 	 * <p>
-	 * You can add additional auto modes by adding additional commands to the
+	 * You can add additional auto modes by adding additional commandChooser to the
 	 * chooser code above (like the commented example) or additional comparisons
-	 * to the switch structure below with additional strings & commands.
+	 * to the switch structure below with additional strings & commandChooser.
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
-		if(autonomousCommand != null) {
-			autonomousCommand.start();
-		}
+		commands.autoCommand.start();
 	}
 
 	/**
@@ -93,18 +77,12 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		Scheduler.getInstance().run();
+		periodic();
 	}
 
 	@Override
 	public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
-		if(autonomousCommand != null) {
-			autonomousCommand.cancel();
-		}
+		commands.autoCommand.cancel();
 	}
 
 	/**
@@ -112,7 +90,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		Scheduler.getInstance().run();
+		periodic();
 	}
 
 	/**
@@ -120,5 +98,10 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+		periodic();
+	}
+
+	private void periodic() {
+		Scheduler.getInstance().run();
 	}
 }
