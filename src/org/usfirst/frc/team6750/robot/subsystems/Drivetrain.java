@@ -7,17 +7,29 @@
 
 package org.usfirst.frc.team6750.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
+import org.usfirst.frc.team6750.robot.*;
+
+import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.command.*;
 
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
  */
-public class ExampleSubsystem extends Subsystem {
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
+public class Drivetrain extends Subsystem {
+	public final Spark leftFront, leftBack, rightFront, rightBack;
+	
+	public Drivetrain() {
+		leftFront = new Spark(RobotMap.DT_LEFT_FRONT);
+		leftBack = new Spark(RobotMap.DT_LEFT_BACK);
+		rightFront = new Spark(RobotMap.DT_RIGHT_FRONT);
+		rightBack = new Spark(RobotMap.DT_RIGHT_BACK);
+	}
+	
+	@Override
+	public void periodic() {
+	}
 
-	public void initDefaultCommand() {
-		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
+	@Override
+	protected void initDefaultCommand() {
 	}
 }

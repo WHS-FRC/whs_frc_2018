@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj.command.*;
  * project.
  */
 public class Robot extends TimedRobot {
-	public static final ExampleSubsystem kExampleSubsystem = new ExampleSubsystem();
+	public static Drivetrain drivetrain;
 	public static OI oi;
 	public static Commands commands;
 
@@ -36,6 +36,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
+		drivetrain = new Drivetrain();
 		oi = new OI();
 		commands = new Commands();
 		commandChooser = new CommandChooser();
