@@ -33,6 +33,7 @@ public class Drivetrain extends Subsystem {
 
 	@Override
 	public void periodic() {
+		encoder.periodic();
 	}
 
 	@Override
