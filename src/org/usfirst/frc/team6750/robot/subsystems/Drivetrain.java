@@ -17,14 +17,18 @@ import edu.wpi.first.wpilibj.command.*;
  */
 public class Drivetrain extends Subsystem {
 	public static final double BRAKE_MULT = 0.75D;
-	
+
 	public final Spark leftFront, leftBack, rightFront, rightBack;
+
+	public final Encoder encoder;
 
 	public Drivetrain() {
 		leftFront = new Spark(RobotMap.DT_LEFT_FRONT);
 		leftBack = new Spark(RobotMap.DT_LEFT_BACK);
 		rightFront = new Spark(RobotMap.DT_RIGHT_FRONT);
 		rightBack = new Spark(RobotMap.DT_RIGHT_BACK);
+
+		encoder = new Encoder(this);
 	}
 
 	@Override
@@ -35,9 +39,9 @@ public class Drivetrain extends Subsystem {
 	protected void initDefaultCommand() {
 	}
 
-
 	/**
 	 * Drives both the right-side and the left-side motors with a given speed
+	 * 
 	 * @param speed the speed
 	 */
 	public void drive(double speed) {
@@ -47,6 +51,7 @@ public class Drivetrain extends Subsystem {
 
 	/**
 	 * Drives the left-side motors with a given speed
+	 * 
 	 * @param speed the speed
 	 */
 	public void driveLeft(double speed) {
@@ -56,6 +61,7 @@ public class Drivetrain extends Subsystem {
 
 	/**
 	 * Drives the right-side motors with a given speed
+	 * 
 	 * @param speed the speed
 	 */
 	public void driveRight(double speed) {
@@ -77,17 +83,18 @@ public class Drivetrain extends Subsystem {
 	/**
 	 * Used to slow down a given motor until it reaches 0
 	 * Rate at which is slows down the motor can be adjusted by changing the BRAKE_MULT constant
+	 * 
 	 * @param motor the motor
 	 */
 	private void brake(Spark motor) {
 		double speed = motor.getSpeed();
-		
+
 		if(speed < 0.1D) {
 			speed = 0D;
 		} else {
 			speed *= BRAKE_MULT;
 		}
-		
+
 		motor.setSpeed(speed);
 	}
 }
