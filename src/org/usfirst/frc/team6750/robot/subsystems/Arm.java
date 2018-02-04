@@ -20,7 +20,7 @@ public class Arm extends Subsystem {
 	@Override
 	protected void initDefaultCommand() {
 	}
-	
+
 	public void setSpeed(double speed) {
 		left.setSpeed(speed);
 		right.setSpeed(-speed);

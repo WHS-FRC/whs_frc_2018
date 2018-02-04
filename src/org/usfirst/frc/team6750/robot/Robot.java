@@ -112,7 +112,7 @@ public class Robot extends TimedRobot {
 
 	private void periodic() {
 		Scheduler.getInstance().run();
-		
+
 		drivetrain.periodic();
 		boxIntake.periodic();
 		arm.periodic();

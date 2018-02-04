@@ -14,7 +14,7 @@ public class DriveCommand extends TimedCommand {
 	 */
 	public DriveCommand(double speed, double duration) {
 		super(duration);
-		
+
 		this.requires(Robot.drivetrain);
 
 		this.speed = speed;
