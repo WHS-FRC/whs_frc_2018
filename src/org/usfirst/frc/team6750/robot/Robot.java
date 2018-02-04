@@ -22,6 +22,10 @@ import edu.wpi.first.wpilibj.command.*;
  */
 public class Robot extends TimedRobot {
 	public static Drivetrain drivetrain;
+	public static BoxIntake boxIntake;
+	public static Arm arm;
+	public static Winch winch;
+
 	public static OI oi;
 	public static Commands commands;
 
@@ -37,6 +41,10 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		drivetrain = new Drivetrain();
+		boxIntake = new BoxIntake();
+		arm = new Arm();
+		winch = new Winch();
+
 		oi = new OI();
 		commands = new Commands();
 		commandChooser = new CommandChooser();
