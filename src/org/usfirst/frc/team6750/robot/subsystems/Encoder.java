@@ -3,7 +3,7 @@ package org.usfirst.frc.team6750.robot.subsystems;
 import java.util.*;
 
 /**
- * Used to count the rotations on the drivetrain motors
+ * Used to count the rotations on the drivetrain motors, or most likely just one drivetrain motor
  * 
  * Currently an empty class that will have more concrete code once the encoders are in place
  * 

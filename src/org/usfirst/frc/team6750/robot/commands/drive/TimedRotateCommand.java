@@ -3,16 +3,19 @@ package org.usfirst.frc.team6750.robot.commands.drive;
 import org.usfirst.frc.team6750.robot.*;
 import org.usfirst.frc.team6750.robot.commands.*;
 
-public class DriveCommand extends TimedCommand {
+public class TimedRotateCommand extends TimedCommand {
 	public final double speed;
 
 	/**
-	 * Creates a new drive command with a given speed and a given duration
+	 * Creates a new rotate command with a given speed and a given duration
+	 * 
+	 * +speed = turn right
+	 * -speed = turn left
 	 * 
 	 * @param speed the speed
-	 * @param duration the duration
+	 * @param duration the duration in seconds
 	 */
-	public DriveCommand(double speed, double duration) {
+	public TimedRotateCommand(double speed, double duration) {
 		super(duration);
 
 		this.requires(Robot.drivetrain);
@@ -24,21 +27,18 @@ public class DriveCommand extends TimedCommand {
 	protected void initialize() {
 		super.initialize();
 
-		Robot.drivetrain.drive(speed);
+		Robot.drivetrain.driveLeft(speed);
+		Robot.drivetrain.driveRight(-speed);
 	}
 
 	@Override
 	protected void execute() {
-		Robot.drivetrain.drive(speed);
+		Robot.drivetrain.driveLeft(speed);
+		Robot.drivetrain.driveRight(-speed);
 	}
 
 	@Override
 	protected void end() {
 		Robot.drivetrain.drive(0D);
-	}
-
-	@Override
-	protected void interrupted() {
-		end();
 	}
 }
