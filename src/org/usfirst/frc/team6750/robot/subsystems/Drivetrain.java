@@ -46,7 +46,7 @@ public class Drivetrain extends Subsystem {
 
 	@Override
 	public void periodic() {
-		// encoder.periodic();
+		encoder.periodic();
 
 		Joystick js = Robot.oi.ltJS;
 

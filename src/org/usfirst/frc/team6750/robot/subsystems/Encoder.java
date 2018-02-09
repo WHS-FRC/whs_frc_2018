@@ -2,6 +2,8 @@ package org.usfirst.frc.team6750.robot.subsystems;
 
 import java.util.*;
 
+import edu.wpi.first.wpilibj.*;
+
 /**
  * Used to count the rotations on the drivetrain motors, or most likely just one drivetrain motor
  * 
@@ -19,11 +21,15 @@ public class Encoder {
 	public static final double WHEEL_CIRCUMFERENCE = 6D * Math.PI;
 
 	public final Drivetrain drivetrain;
+	
+	public final AnalogInput ai;
 
 	private final List<Counter> counters;
 
 	public Encoder(Drivetrain drivetrain) {
 		this.drivetrain = drivetrain;
+		
+		this.ai = new AnalogInput(0);
 
 		counters = new ArrayList<Counter>();
 	}
@@ -50,6 +56,10 @@ public class Encoder {
 				c.rotate(rotations);
 			}
 		}
+
+		System.out.println("RAW: " + ai.getVoltage());
+		System.out.println("AVG: " + ai.getAverageValue());
+		System.out.println("ACC: " + ai.getAccumulatorValue());
 	}
 
 	public class Counter {
