@@ -28,6 +28,9 @@ public class Robot extends TimedRobot {
 
 	public static OI oi;
 	public static Commands commands;
+	
+	public static Timer timer;
+	public static double delta;
 
 	/**
 	 * Presents a menu to the driver station that contains various commandChooser
@@ -48,6 +51,9 @@ public class Robot extends TimedRobot {
 		oi = new OI();
 		commands = new Commands();
 		commandChooser = new CommandChooser();
+		
+		timer = new Timer();
+		timer.start();
 	}
 
 	/**
@@ -111,11 +117,10 @@ public class Robot extends TimedRobot {
 	}
 
 	private void periodic() {
+		delta = timer.get();
+		
 		Scheduler.getInstance().run();
-
-		drivetrain.periodic();
-		//boxIntake.periodic();
-		//arm.periodic();
-		//winch.periodic();
+		
+		timer.reset();
 	}
 }

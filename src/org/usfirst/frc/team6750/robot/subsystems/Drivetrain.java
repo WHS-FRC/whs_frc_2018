@@ -127,7 +127,7 @@ public class Drivetrain extends Subsystem {
 		} else if (speed < 0.1D) {
 			speed = 0D;
 		} else {
-			speed *= BRAKE_MULT;
+			speed -= Robot.delta * (speed * BRAKE_MULT);
 		}
 
 		motor.setSpeed(speed);
