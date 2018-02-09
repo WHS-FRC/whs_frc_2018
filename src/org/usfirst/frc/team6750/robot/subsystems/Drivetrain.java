@@ -28,12 +28,14 @@ public class Drivetrain extends Subsystem {
 
 	public final DifferentialDrive drive;
 
+	private double lastRot = 0D, lastMove = 0D;
+
 	public final Encoder encoder;
 
 	public Drivetrain() {
 		super();
 		System.out.println("AVG: ");
-		
+
 		leftFront = new Spark(RobotMap.DT_LEFT_FRONT);
 		leftBack = new Spark(RobotMap.DT_LEFT_BACK);
 		rightFront = new Spark(RobotMap.DT_RIGHT_FRONT);
@@ -51,6 +53,10 @@ public class Drivetrain extends Subsystem {
 	public void periodic() {
 		encoder.periodic();
 
+		arcadeDrive();
+	}
+
+	private void arcadeDrive() {
 		Joystick js = Robot.oi.ltJS;
 
 		double rotAxis = js.getRawAxis(2), moveAxis = -js.getRawAxis(3); // Axis is inverted
@@ -58,12 +64,14 @@ public class Drivetrain extends Subsystem {
 		rotAxis *= 0.75D;
 		moveAxis *= 0.75D;
 
-		if (Math.abs(rotAxis) > 0.1D || Math.abs(moveAxis) > 0.1D) {
-			drive.arcadeDrive(moveAxis, rotAxis);
-		} else {
+		if (moveAxis < lastMove && rotAxis < lastRot) {
 			periodicBrake();
+		} else if (Math.abs(rotAxis) > 0.1D || Math.abs(moveAxis) > 0.1D) {
+			drive.arcadeDrive(moveAxis, rotAxis);
 		}
 
+		lastRot = rotAxis;
+		lastMove = moveAxis;
 	}
 
 	@Override
