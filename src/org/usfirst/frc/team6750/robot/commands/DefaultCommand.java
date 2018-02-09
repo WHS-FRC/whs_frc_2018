@@ -7,7 +7,7 @@
 
 package org.usfirst.frc.team6750.robot.commands;
 
-import edu.wpi.first.wpilibj.command.*;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * An example command. You can replace me with your own command.

@@ -1,7 +1,6 @@
 package org.usfirst.frc.team6750.robot.commands.drive;
 
-import org.usfirst.frc.team6750.robot.*;
-import org.usfirst.frc.team6750.robot.commands.*;
+import org.usfirst.frc.team6750.robot.Robot;
 
 public class DistanceDriveCommand extends DistanceCommand {
 	public final double speed;
@@ -35,7 +34,7 @@ public class DistanceDriveCommand extends DistanceCommand {
 	@Override
 	protected void end() {
 		super.end();
-		
+
 		Robot.drivetrain.drive(0D);
 	}
 }

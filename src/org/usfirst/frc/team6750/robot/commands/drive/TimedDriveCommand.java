@@ -1,7 +1,7 @@
 package org.usfirst.frc.team6750.robot.commands.drive;
 
-import org.usfirst.frc.team6750.robot.*;
-import org.usfirst.frc.team6750.robot.commands.*;
+import org.usfirst.frc.team6750.robot.Robot;
+import org.usfirst.frc.team6750.robot.commands.TimedCommand;
 
 public class TimedDriveCommand extends TimedCommand {
 	public final double speed;

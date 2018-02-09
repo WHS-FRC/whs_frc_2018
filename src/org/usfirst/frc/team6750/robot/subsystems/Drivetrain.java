@@ -22,19 +22,23 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 public class Drivetrain extends Subsystem {
 	public static final double BRAKE_MULT = 0.75D;
 
-	public final Spark leftFront, leftBack, rightFront, rightBack;
+	public final Spark leftFront,
+			leftBack,
+			rightFront,
+			rightBack;
 
-	public final SpeedControllerGroup left, right;
+	public final SpeedControllerGroup left,
+			right;
 
 	public final DifferentialDrive drive;
 
-	private double lastRot = 0D, lastMove = 0D;
+	private double lastRot = 0D,
+			lastMove = 0D;
 
 	public final Encoder encoder;
 
 	public Drivetrain() {
 		super();
-		System.out.println("AVG: ");
 
 		leftFront = new Spark(RobotMap.DT_LEFT_FRONT);
 		leftBack = new Spark(RobotMap.DT_LEFT_BACK);
@@ -59,14 +63,15 @@ public class Drivetrain extends Subsystem {
 	private void arcadeDrive() {
 		Joystick js = Robot.oi.ltJS;
 
-		double rotAxis = js.getRawAxis(2), moveAxis = -js.getRawAxis(3); // Axis is inverted
+		double rotAxis = js.getRawAxis(2),
+				moveAxis = -js.getRawAxis(3); // Axis is inverted
 
 		rotAxis *= 0.75D;
 		moveAxis *= 0.75D;
 
-		if (moveAxis < lastMove && rotAxis < lastRot) {
+		if(moveAxis < lastMove && rotAxis < lastRot) {
 			periodicBrake();
-		} else if (Math.abs(rotAxis) > 0.1D || Math.abs(moveAxis) > 0.1D) {
+		} else if(Math.abs(rotAxis) > 0.1D || Math.abs(moveAxis) > 0.1D) {
 			drive.arcadeDrive(moveAxis, rotAxis);
 		}
 
@@ -82,7 +87,7 @@ public class Drivetrain extends Subsystem {
 	 * Drives both the right-side and the left-side motors with a given speed
 	 * 
 	 * @param speed
-	 *            the speed
+	 * the speed
 	 */
 	public void drive(double speed) {
 		driveLeft(speed);
@@ -93,7 +98,7 @@ public class Drivetrain extends Subsystem {
 	 * Drives the left-side motors with a given speed
 	 * 
 	 * @param speed
-	 *            the speed
+	 * the speed
 	 */
 	public void driveLeft(double speed) {
 		leftFront.setSpeed(speed);
@@ -104,7 +109,7 @@ public class Drivetrain extends Subsystem {
 	 * Drives the right-side motors with a given speed
 	 * 
 	 * @param speed
-	 *            the speed
+	 * the speed
 	 */
 	public void driveRight(double speed) {
 		rightFront.setSpeed(speed);
@@ -132,9 +137,9 @@ public class Drivetrain extends Subsystem {
 	private void brake(Spark motor) {
 		double speed = motor.getSpeed();
 
-		if (speed == 0D) {
+		if(speed == 0D) {
 			return;
-		} else if (speed < 0.1D) {
+		} else if(speed < 0.1D) {
 			speed = 0D;
 		} else {
 			speed -= Robot.delta * (speed * BRAKE_MULT);

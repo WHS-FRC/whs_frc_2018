@@ -1,21 +1,21 @@
 package org.usfirst.frc.team6750.robot.commands.drive;
 
-import org.usfirst.frc.team6750.robot.*;
-import org.usfirst.frc.team6750.robot.subsystems.Encoder.*;
+import org.usfirst.frc.team6750.robot.Robot;
+import org.usfirst.frc.team6750.robot.subsystems.Encoder.Counter;
 
-import edu.wpi.first.wpilibj.command.*;
+import edu.wpi.first.wpilibj.command.Command;
 
 public abstract class DistanceCommand extends Command {
 	/**
 	 * Measured in inches
 	 */
 	public final double distance;
-	
+
 	public Counter counter;
 
 	public DistanceCommand(double distance) {
 		this.distance = distance;
-		
+
 		this.requires(Robot.drivetrain);
 	}
 
@@ -23,7 +23,7 @@ public abstract class DistanceCommand extends Command {
 	protected void initialize() {
 		counter = Robot.drivetrain.encoder.createCounter();
 	}
-	
+
 	@Override
 	protected void end() {
 		counter.setToRemove();

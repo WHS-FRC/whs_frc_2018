@@ -1,7 +1,7 @@
 package org.usfirst.frc.team6750.robot.commands;
 
-import edu.wpi.first.wpilibj.*;
-import edu.wpi.first.wpilibj.command.*;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.Command;
 
 public abstract class TimedCommand extends Command {
 	public final Timer timer;

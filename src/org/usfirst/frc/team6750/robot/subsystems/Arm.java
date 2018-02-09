@@ -1,12 +1,13 @@
 package org.usfirst.frc.team6750.robot.subsystems;
 
-import org.usfirst.frc.team6750.robot.*;
+import org.usfirst.frc.team6750.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.*;
-import edu.wpi.first.wpilibj.command.*;
+import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Arm extends Subsystem {
-	public final Spark left, right;
+	public final Spark left,
+			right;
 
 	public Arm() {
 		left = new Spark(RobotMap.ARM_LEFT);

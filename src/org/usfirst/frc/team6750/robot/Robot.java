@@ -7,11 +7,15 @@
 
 package org.usfirst.frc.team6750.robot;
 
-import org.usfirst.frc.team6750.robot.commands.*;
-import org.usfirst.frc.team6750.robot.subsystems.*;
+import org.usfirst.frc.team6750.robot.commands.CommandChooser;
+import org.usfirst.frc.team6750.robot.subsystems.Arm;
+import org.usfirst.frc.team6750.robot.subsystems.BoxIntake;
+import org.usfirst.frc.team6750.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team6750.robot.subsystems.Winch;
 
-import edu.wpi.first.wpilibj.*;
-import edu.wpi.first.wpilibj.command.*;
+import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.Scheduler;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,7 +32,7 @@ public class Robot extends TimedRobot {
 
 	public static OI oi;
 	public static Commands commands;
-	
+
 	public static Timer timer;
 	public static double delta;
 
@@ -51,7 +55,7 @@ public class Robot extends TimedRobot {
 		oi = new OI();
 		commands = new Commands();
 		commandChooser = new CommandChooser();
-		
+
 		timer = new Timer();
 		timer.start();
 	}
@@ -93,7 +97,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		periodic();
-		
+
 	}
 
 	@Override
@@ -119,10 +123,9 @@ public class Robot extends TimedRobot {
 
 	private void periodic() {
 		delta = timer.get();
-		System.out.println("AH");
-		
+
 		Scheduler.getInstance().run();
-		
+
 		timer.reset();
 	}
 }

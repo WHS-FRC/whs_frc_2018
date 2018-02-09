@@ -1,6 +1,7 @@
 package org.usfirst.frc.team6750.robot;
 
-import org.usfirst.frc.team6750.robot.commands.*;
+import org.usfirst.frc.team6750.robot.commands.AutonomousCommand;
+import org.usfirst.frc.team6750.robot.commands.DefaultCommand;
 
 public class Commands {
 	public final DefaultCommand defaultCommand;
