@@ -7,10 +7,14 @@
 
 package org.usfirst.frc.team6750.robot.subsystems;
 
-import org.usfirst.frc.team6750.robot.*;
+import org.usfirst.frc.team6750.robot.Robot;
+import org.usfirst.frc.team6750.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.*;
-import edu.wpi.first.wpilibj.command.*;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 /**
  * An example subsystem. You can replace me with your own Subsystem.
@@ -20,6 +24,10 @@ public class Drivetrain extends Subsystem {
 
 	public final Spark leftFront, leftBack, rightFront, rightBack;
 
+	public final SpeedControllerGroup left, right;
+
+	public final DifferentialDrive drive;
+
 	public final Encoder encoder;
 
 	public Drivetrain() {
@@ -28,12 +36,31 @@ public class Drivetrain extends Subsystem {
 		rightFront = new Spark(RobotMap.DT_RIGHT_FRONT);
 		rightBack = new Spark(RobotMap.DT_RIGHT_BACK);
 
+		left = new SpeedControllerGroup(leftFront, leftBack);
+		right = new SpeedControllerGroup(rightFront, rightBack);
+
+		drive = new DifferentialDrive(left, right);
+
 		encoder = new Encoder(this);
 	}
 
 	@Override
 	public void periodic() {
-		encoder.periodic();
+		// encoder.periodic();
+
+		Joystick js = Robot.oi.ltJS;
+
+		double rotAxis = js.getRawAxis(4), moveAxis = -js.getRawAxis(5); // Axis is inverted
+
+		rotAxis *= 0.75D;
+		moveAxis *= 0.75D;
+
+		if (Math.abs(rotAxis) > 0.1D || Math.abs(moveAxis) > 0.1D) {
+			drive.arcadeDrive(moveAxis, rotAxis);
+		} else {
+			periodicBrake();
+		}
+
 	}
 
 	@Override
@@ -43,7 +70,8 @@ public class Drivetrain extends Subsystem {
 	/**
 	 * Drives both the right-side and the left-side motors with a given speed
 	 * 
-	 * @param speed the speed
+	 * @param speed
+	 *            the speed
 	 */
 	public void drive(double speed) {
 		driveLeft(speed);
@@ -53,7 +81,8 @@ public class Drivetrain extends Subsystem {
 	/**
 	 * Drives the left-side motors with a given speed
 	 * 
-	 * @param speed the speed
+	 * @param speed
+	 *            the speed
 	 */
 	public void driveLeft(double speed) {
 		leftFront.setSpeed(speed);
@@ -63,7 +92,8 @@ public class Drivetrain extends Subsystem {
 	/**
 	 * Drives the right-side motors with a given speed
 	 * 
-	 * @param speed the speed
+	 * @param speed
+	 *            the speed
 	 */
 	public void driveRight(double speed) {
 		rightFront.setSpeed(speed);
@@ -71,8 +101,9 @@ public class Drivetrain extends Subsystem {
 	}
 
 	/**
-	 * Called during periodic to slow the motors to a stop instead of abruptly setting to 0
-	 * Done by multiplying motor speeds by the BRAKE_MULT constant, which is < 1.0D
+	 * Called during periodic to slow the motors to a stop instead of abruptly
+	 * setting to 0 Done by multiplying motor speeds by the BRAKE_MULT constant,
+	 * which is < 1.0D
 	 */
 	public void periodicBrake() {
 		brake(leftFront);
@@ -82,15 +113,18 @@ public class Drivetrain extends Subsystem {
 	}
 
 	/**
-	 * Used to slow down a given motor until it reaches 0
-	 * Rate at which is slows down the motor can be adjusted by changing the BRAKE_MULT constant
+	 * Used to slow down a given motor until it reaches 0 Rate at which is slows
+	 * down the motor can be adjusted by changing the BRAKE_MULT constant
 	 * 
-	 * @param motor the motor
+	 * @param motor
+	 *            the motor
 	 */
 	private void brake(Spark motor) {
 		double speed = motor.getSpeed();
 
-		if(speed < 0.1D) {
+		if (speed == 0D) {
+			return;
+		} else if (speed < 0.1D) {
 			speed = 0D;
 		} else {
 			speed *= BRAKE_MULT;

@@ -15,10 +15,10 @@ package org.usfirst.frc.team6750.robot;
  */
 public class RobotMap {
 	//DT = drivetrain
-	public static final int DT_LEFT_FRONT = 0;
-	public static final int DT_LEFT_BACK = 1;
-	public static final int DT_RIGHT_FRONT = 2;
-	public static final int DT_RIGHT_BACK = 3;
+	public static final int DT_LEFT_FRONT = 1;
+	public static final int DT_LEFT_BACK = 0;
+	public static final int DT_RIGHT_FRONT = 5;
+	public static final int DT_RIGHT_BACK = 4;
 
 	//BI = box intake
 	public static final int BI_LEFT = 4;

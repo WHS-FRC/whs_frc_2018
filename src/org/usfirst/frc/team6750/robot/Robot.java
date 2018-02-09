@@ -41,9 +41,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		drivetrain = new Drivetrain();
-		boxIntake = new BoxIntake();
-		arm = new Arm();
-		winch = new Winch();
+		//boxIntake = new BoxIntake();
+		//arm = new Arm();
+		//winch = new Winch();
 
 		oi = new OI();
 		commands = new Commands();
@@ -114,8 +114,8 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 
 		drivetrain.periodic();
-		boxIntake.periodic();
-		arm.periodic();
-		winch.periodic();
+		//boxIntake.periodic();
+		//arm.periodic();
+		//winch.periodic();
 	}
 }
