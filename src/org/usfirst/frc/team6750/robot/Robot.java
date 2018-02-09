@@ -93,6 +93,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		periodic();
+		
 	}
 
 	@Override
@@ -118,6 +119,7 @@ public class Robot extends TimedRobot {
 
 	private void periodic() {
 		delta = timer.get();
+		System.out.println("AH");
 		
 		Scheduler.getInstance().run();
 		

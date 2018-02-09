@@ -2,6 +2,8 @@ package org.usfirst.frc.team6750.robot.subsystems;
 
 import java.util.*;
 
+import org.usfirst.frc.team6750.robot.Robot;
+
 import edu.wpi.first.wpilibj.*;
 
 /**
@@ -19,12 +21,30 @@ public class Encoder {
 	 * The wheel circumference in inches
 	 */
 	public static final double WHEEL_CIRCUMFERENCE = 6D * Math.PI;
+	
+	/**
+	 * The amount of spokes the wheel has
+	 */
+	public static final int SPOKE_COUNT = 4;
+	
+	/**
+	 * The minimum voltage supplied by the sensor that counts as "triggering"
+	 */
+	public static final int MIN_VOLTAGE = 100, MAX_VOLTAGE = 500;
+	
+	/**
+	 * The minimum time the sensor needs to be triggering to count as a count
+	 */
+	public static final double MIN_TRIGGER_DURATION = 0.25D;
 
 	public final Drivetrain drivetrain;
 	
 	public final AnalogInput ai;
 
 	private final List<Counter> counters;
+	
+	private boolean triggering = false, triggered = false;
+	private double triggerDuration = 0D;
 
 	public Encoder(Drivetrain drivetrain) {
 		this.drivetrain = drivetrain;
@@ -44,9 +64,44 @@ public class Encoder {
 
 	public void periodic() {
 		int rotations = 0;
+		
+		readSensor();
 
-		//Add or subtract rotations
-
+		manageCounters(rotations);
+	}
+	
+	private int readSensor() {
+		int rotations = 0;
+		
+		int voltage = ai.getAverageValue();
+		
+		System.out.println("AVG: " + voltage);
+		
+		if(voltage > MIN_VOLTAGE && voltage < MAX_VOLTAGE) {
+			boolean prevState = triggering;
+			triggering = true;
+			
+			if(prevState) {
+				triggerDuration += Robot.delta;
+			}
+			
+			if(triggerDuration > MIN_TRIGGER_DURATION) {
+				if(!triggered) {
+					triggered = true;
+					
+					rotations = 1;
+				}
+			}
+		} else {
+			triggering = false;
+			triggerDuration = 0;
+			triggered = false;
+		}
+		
+		return rotations;
+	}
+	
+	private void manageCounters(int rotations) {
 		for(int i = 0; i < counters.size(); i++) {
 			Counter c = counters.get(i);
 
@@ -56,10 +111,6 @@ public class Encoder {
 				c.rotate(rotations);
 			}
 		}
-
-		System.out.println("RAW: " + ai.getVoltage());
-		System.out.println("AVG: " + ai.getAverageValue());
-		System.out.println("ACC: " + ai.getAccumulatorValue());
 	}
 
 	public class Counter {

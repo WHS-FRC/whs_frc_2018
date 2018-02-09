@@ -31,6 +31,9 @@ public class Drivetrain extends Subsystem {
 	public final Encoder encoder;
 
 	public Drivetrain() {
+		super();
+		System.out.println("AVG: ");
+		
 		leftFront = new Spark(RobotMap.DT_LEFT_FRONT);
 		leftBack = new Spark(RobotMap.DT_LEFT_BACK);
 		rightFront = new Spark(RobotMap.DT_RIGHT_FRONT);
@@ -50,7 +53,7 @@ public class Drivetrain extends Subsystem {
 
 		Joystick js = Robot.oi.ltJS;
 
-		double rotAxis = js.getRawAxis(4), moveAxis = -js.getRawAxis(5); // Axis is inverted
+		double rotAxis = js.getRawAxis(2), moveAxis = -js.getRawAxis(3); // Axis is inverted
 
 		rotAxis *= 0.75D;
 		moveAxis *= 0.75D;
@@ -117,7 +120,6 @@ public class Drivetrain extends Subsystem {
 	 * down the motor can be adjusted by changing the BRAKE_MULT constant
 	 * 
 	 * @param motor
-	 *            the motor
 	 */
 	private void brake(Spark motor) {
 		double speed = motor.getSpeed();
