@@ -1,9 +1,12 @@
 package org.usfirst.frc.team6750.robot.commands;
 
+import org.usfirst.frc.team6750.robot.commands.drive.DistanceDriveCommand;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutonomousCommand extends CommandGroup {
 	public AutonomousCommand() {
+		this.addParallel(new DistanceDriveCommand(0.225D, 36));
 	}
 
 	@Override

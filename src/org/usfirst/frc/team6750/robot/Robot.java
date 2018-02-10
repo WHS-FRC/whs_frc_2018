@@ -11,11 +11,13 @@ import org.usfirst.frc.team6750.robot.commands.CommandChooser;
 import org.usfirst.frc.team6750.robot.subsystems.Arm;
 import org.usfirst.frc.team6750.robot.subsystems.BoxIntake;
 import org.usfirst.frc.team6750.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team6750.robot.subsystems.Encoder.Counter;
 import org.usfirst.frc.team6750.robot.subsystems.Winch;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -50,7 +52,7 @@ public class Robot extends TimedRobot {
 		drivetrain = new Drivetrain();
 		//boxIntake = new BoxIntake();
 		//arm = new Arm();
-		//winch = new Winch();
+		winch = new Winch();
 
 		oi = new OI();
 		commands = new Commands();
@@ -100,9 +102,12 @@ public class Robot extends TimedRobot {
 
 	}
 
+	public Counter counter;
+	
 	@Override
 	public void teleopInit() {
 		commands.autoCommand.cancel();
+		counter = drivetrain.encoder.createCounter();
 	}
 
 	/**
@@ -111,6 +116,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		periodic();
+		
+		SmartDashboard.putNumber("Distance", counter.getDistance());
+		SmartDashboard.putNumber("Spokes", counter.getSpokes());
 	}
 
 	/**
@@ -120,11 +128,16 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 		periodic();
 	}
+	
 
 	private void periodic() {
 		delta = timer.get();
 
 		Scheduler.getInstance().run();
+		
+		if(!this.isAutonomous() && commands.autoCommand.isRunning()) {
+			commands.autoCommand.cancel();
+		}
 
 		timer.reset();
 	}

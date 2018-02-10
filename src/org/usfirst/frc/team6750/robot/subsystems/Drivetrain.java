@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * An example subsystem. You can replace me with your own Subsystem.
@@ -58,6 +59,8 @@ public class Drivetrain extends Subsystem {
 		encoder.periodic();
 
 		arcadeDrive();
+		
+		SmartDashboard.putNumber("Speed", this.leftBack.getSpeed());
 	}
 
 	private void arcadeDrive() {
@@ -91,7 +94,7 @@ public class Drivetrain extends Subsystem {
 	 */
 	public void drive(double speed) {
 		driveLeft(speed);
-		driveRight(speed);
+		driveRight(-speed);
 	}
 
 	/**

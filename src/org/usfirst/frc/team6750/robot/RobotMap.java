@@ -28,6 +28,6 @@ public class RobotMap {
 	public static final int ARM_RIGHT = 7;
 
 	//W = winch
-	public static final int W_LEFT = 8;
-	public static final int W_RIGHT = 9;
+	public static final int W_LEFT = 2;
+	public static final int W_RIGHT = 3;
 }
