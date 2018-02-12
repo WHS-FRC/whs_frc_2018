@@ -36,7 +36,5 @@ public class DistanceDriveCommand extends DistanceCommand {
 		super.end();
 
 		Robot.drivetrain.drive(0D);
-		
-		System.out.println("DONE");
 	}
 }

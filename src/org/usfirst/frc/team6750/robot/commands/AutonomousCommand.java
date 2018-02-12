@@ -6,7 +6,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutonomousCommand extends CommandGroup {
 	public AutonomousCommand() {
-		this.addParallel(new DistanceDriveCommand(0.225D, 36));
+		//260" is approx. the distance needed to get in range of the tall scale
+		this.addParallel(new DistanceDriveCommand(0.225D, 260));
 	}
 
 	@Override
