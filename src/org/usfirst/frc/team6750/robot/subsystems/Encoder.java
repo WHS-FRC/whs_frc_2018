@@ -6,7 +6,6 @@ import java.util.List;
 import org.usfirst.frc.team6750.robot.Robot;
 
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Used to count the spokes on the drivetrain motors, or most likely just one drivetrain motor
@@ -67,15 +66,11 @@ public class Encoder {
 	}
 
 	public void periodic() {
-		MIN_TRIGGER_DURATION = SmartDashboard.getNumber("Trigger_Duration", 0.025D);
-
 		manageCounters(readSensor());
 	}
 
 	private boolean readSensor() {
 		int voltage = ai.getAverageValue();
-
-		SmartDashboard.putNumber("Sensor Voltage", voltage);
 
 		if(voltage > MIN_VOLTAGE && voltage < MAX_VOLTAGE) {
 			boolean prevState = triggering;
