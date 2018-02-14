@@ -16,7 +16,7 @@ public class DistanceDriveCommand extends DistanceCommand {
 
 		this.requires(Robot.drivetrain);
 
-		this.speed = speed;
+		this.speed = speed > MAX_SPEED ? MAX_SPEED : speed;
 	}
 
 	@Override

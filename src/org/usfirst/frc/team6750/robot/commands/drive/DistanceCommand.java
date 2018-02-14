@@ -6,6 +6,8 @@ import org.usfirst.frc.team6750.robot.subsystems.Encoder.Counter;
 import edu.wpi.first.wpilibj.command.Command;
 
 public abstract class DistanceCommand extends Command {
+	public static final double MAX_SPEED = 0.245D;
+	
 	/**
 	 * Measured in inches
 	 */
