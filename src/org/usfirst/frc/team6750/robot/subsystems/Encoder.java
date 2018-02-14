@@ -67,16 +67,12 @@ public class Encoder {
 	}
 
 	public void periodic() {
-		int spokes = readSensor();
-		
 		MIN_TRIGGER_DURATION = SmartDashboard.getNumber("Trigger_Duration", 0.025D);
 
-		manageCounters(spokes);
+		manageCounters(readSensor());
 	}
 
-	private int readSensor() {
-		int spokes = 0;
-
+	private boolean readSensor() {
 		int voltage = ai.getAverageValue();
 
 		SmartDashboard.putNumber("Sensor Voltage", voltage);
@@ -93,7 +89,7 @@ public class Encoder {
 				if(!triggered) {
 					triggered = true;
 
-					spokes = 1;
+					return true;
 				}
 			}
 		} else {
@@ -102,17 +98,17 @@ public class Encoder {
 			triggered = false;
 		}
 
-		return spokes;
+		return false;
 	}
 
-	private void manageCounters(int spokes) {
+	private void manageCounters(boolean addSpoke) {
 		for(int i = 0; i < counters.size(); i++) {
 			Counter c = counters.get(i);
 
 			if(c.remove) {
 				counters.remove(i);
-			} else {
-				c.rotate(spokes);
+			} else if(addSpoke) {
+				c.addSpoke();
 			}
 		}
 	}
@@ -126,11 +122,11 @@ public class Encoder {
 			this.spokes = 0;
 		}
 
-		public void rotate(int spokes) {
-			this.spokes += spokes;
+		public void addSpoke() {
+			this.spokes++;
 		}
 
-		public void setspokes(int spokes) {
+		public void setSpokes(int spokes) {
 			this.spokes = spokes;
 		}
 
