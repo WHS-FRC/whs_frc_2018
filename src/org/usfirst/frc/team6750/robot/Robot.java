@@ -73,7 +73,6 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledPeriodic() {
-		periodic();
 	}
 
 	/**
@@ -94,11 +93,11 @@ public class Robot extends TimedRobot {
 	}
 
 	/**
-	 * This function is called periodically during autonomous.
+	 * This function is called robotPeriodically during autonomous.
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		periodic();
+		robotPeriodic();
 
 	}
 
@@ -111,26 +110,26 @@ public class Robot extends TimedRobot {
 	}
 
 	/**
-	 * This function is called periodically during operator control.
+	 * This function is called robotPeriodically during operator control.
 	 */
 	@Override
 	public void teleopPeriodic() {
-		periodic();
+		robotPeriodic();
 		
 		SmartDashboard.putNumber("Distance", counter.getDistance());
 		SmartDashboard.putNumber("Spokes", counter.getSpokes());
 	}
 
 	/**
-	 * This function is called periodically during test mode.
+	 * This function is called robotPeriodically during test mode.
 	 */
 	@Override
 	public void testPeriodic() {
-		periodic();
+		robotPeriodic();
 	}
 	
-
-	private void periodic() {
+	@Override
+	public void robotPeriodic() {
 		delta = timer.get();
 
 		Scheduler.getInstance().run();

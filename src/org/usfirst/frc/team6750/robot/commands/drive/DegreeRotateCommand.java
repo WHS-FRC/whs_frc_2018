@@ -30,13 +30,13 @@ public class DegreeRotateCommand extends DistanceCommand {
 		super.initialize();
 		
 		Robot.drivetrain.driveLeft(leftSpeed);
-		Robot.drivetrain.driveLeft(-leftSpeed);
+		Robot.drivetrain.driveRight(leftSpeed);
 	}
 
 	@Override
 	protected void execute() {
 		Robot.drivetrain.driveLeft(leftSpeed);
-		Robot.drivetrain.driveLeft(-leftSpeed);
+		Robot.drivetrain.driveRight(leftSpeed);
 	}
 
 	@Override

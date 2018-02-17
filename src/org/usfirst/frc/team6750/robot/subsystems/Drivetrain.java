@@ -59,7 +59,7 @@ public class Drivetrain extends Subsystem {
 		encoder.periodic();
 
 		arcadeDrive();
-		
+
 		SmartDashboard.putNumber("Speed", this.leftBack.getSpeed());
 	}
 
@@ -69,14 +69,10 @@ public class Drivetrain extends Subsystem {
 		double rotAxis = js.getRawAxis(2),
 				moveAxis = -js.getRawAxis(3); // Axis is inverted
 
-		rotAxis *= 0.75D;
-		moveAxis *= 0.75D;
+		rotAxis *= 0.65D;
+		moveAxis *= 0.65D;
 
-		if(moveAxis < lastMove && rotAxis < lastRot) {
-			periodicBrake();
-		} else if(Math.abs(rotAxis) > 0.1D || Math.abs(moveAxis) > 0.1D) {
-			drive.arcadeDrive(moveAxis, rotAxis);
-		}
+		drive.arcadeDrive(moveAxis, rotAxis);
 
 		lastRot = rotAxis;
 		lastMove = moveAxis;
