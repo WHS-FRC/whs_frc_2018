@@ -16,6 +16,7 @@ import org.usfirst.frc.team6750.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team6750.robot.subsystems.Encoder.Counter;
 import org.usfirst.frc.team6750.robot.subsystems.Winch;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -59,6 +60,8 @@ public class Robot extends TimedRobot {
 		oi = new OI();
 		commands = new Commands();
 		commandChooser = new CommandChooser();
+		
+		CameraServer.getInstance().startAutomaticCapture();
 
 		timer = new Timer();
 		timer.start();
