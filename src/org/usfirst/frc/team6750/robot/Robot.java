@@ -7,9 +7,6 @@
 
 package org.usfirst.frc.team6750.robot;
 
-import org.usfirst.frc.team6750.robot.commands.CommandChooser;
-import org.usfirst.frc.team6750.robot.commands.drive.TimedDriveCommand;
-import org.usfirst.frc.team6750.robot.commands.drive.TimedRotateCommand;
 import org.usfirst.frc.team6750.robot.subsystems.Arm;
 import org.usfirst.frc.team6750.robot.subsystems.BoxIntake;
 import org.usfirst.frc.team6750.robot.subsystems.Drivetrain;
@@ -42,11 +39,6 @@ public class Robot extends TimedRobot {
 	public static double delta;
 
 	/**
-	 * Presents a menu to the driver station that contains various commandChooser
-	 */
-	public static CommandChooser commandChooser;
-
-	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
@@ -59,12 +51,17 @@ public class Robot extends TimedRobot {
 
 		oi = new OI();
 		commands = new Commands();
-		commandChooser = new CommandChooser();
-		
+
+		addSDBVariables();
+
 		CameraServer.getInstance().startAutomaticCapture();
 
 		timer = new Timer();
 		timer.start();
+	}
+
+	private void addSDBVariables() {
+		SmartDashboard.putString("Robot Position", "CENTER");
 	}
 
 	/**
@@ -107,7 +104,7 @@ public class Robot extends TimedRobot {
 	}
 
 	public Counter counter;
-	
+
 	@Override
 	public void teleopInit() {
 		commands.autoCommand.cancel();
@@ -120,7 +117,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		robotPeriodic();
-		
+
 		SmartDashboard.putNumber("Distance", counter.getDistance());
 		SmartDashboard.putNumber("Spokes", counter.getSpokes());
 	}
@@ -132,13 +129,13 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 		robotPeriodic();
 	}
-	
+
 	@Override
 	public void robotPeriodic() {
 		delta = timer.get();
 
 		Scheduler.getInstance().run();
-		
+
 		if(!this.isAutonomous() && commands.autoCommand.isRunning()) {
 			commands.autoCommand.cancel();
 		}
