@@ -14,12 +14,12 @@ public class DegreeRotateCommand extends DistanceCommand {
 	 * @param speed the speed
 	 * @param distance the distance in inches
 	 */
-	public DegreeRotateCommand(double speed, int spokes) {
-		super(Math.abs(Encoder.spokesToDistance(spokes)));
+	public DegreeRotateCommand(double speed, double degrees) {
+		super(Math.abs(degrees * INCHES_PER_DEGREE));
 
 		this.requires(Robot.drivetrain);
 
-		this.speed = (speed > MAX_SPEED ? MAX_SPEED : speed) * (spokes < 0 ? -1D : 1D);
+		this.speed = (speed > MAX_SPEED ? MAX_SPEED : speed) * (degrees < 0 ? -1D : 1D);
 	}
 
 	@Override
