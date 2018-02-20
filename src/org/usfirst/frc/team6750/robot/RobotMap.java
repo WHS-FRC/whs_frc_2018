@@ -17,8 +17,8 @@ public class RobotMap {
 	//DT = drivetrain
 	public static final int DT_LEFT_FRONT = 1;
 	public static final int DT_LEFT_BACK = 0;
-	public static final int DT_RIGHT_FRONT = 5;
-	public static final int DT_RIGHT_BACK = 4;
+	public static final int DT_RIGHT_FRONT = 4;
+	public static final int DT_RIGHT_BACK = 5;
 
 	//BI = box intake
 	public static final int BI_LEFT = 4;

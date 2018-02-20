@@ -28,13 +28,13 @@ public class TimedRotateCommand extends TimedCommand {
 		super.initialize();
 
 		Robot.drivetrain.driveLeft(speed);
-		Robot.drivetrain.driveRight(-speed);
+		Robot.drivetrain.driveRight(speed);
 	}
 
 	@Override
 	protected void execute() {
 		Robot.drivetrain.driveLeft(speed);
-		Robot.drivetrain.driveRight(-speed);
+		Robot.drivetrain.driveRight(speed);
 	}
 
 	@Override

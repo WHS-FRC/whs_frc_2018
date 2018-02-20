@@ -9,8 +9,16 @@ public class AutonomousCommand extends CommandGroup {
 	public AutonomousCommand() {
 		//260" is approx. the distance needed to get in range of the tall scale
 		this.addSequential(new DistanceDriveCommand(0.25D, 24));
-		this.addSequential(new DegreeRotateCommand(0.25D, 90));
+		this.addSequential(new DegreeRotateCommand(0.25D, 5));
+		
+		/**
 		this.addSequential(new DistanceDriveCommand(0.25D, 24));
+		this.addSequential(new DegreeRotateCommand(0.25D, -18));
+		this.addSequential(new DistanceDriveCommand(0.25D, 24));
+		this.addSequential(new DegreeRotateCommand(0.25D, -9));
+		this.addSequential(new DistanceDriveCommand(0.25D, 24));
+		this.addSequential(new DegreeRotateCommand(0.25D, 18));
+		**/
 	}
 
 	@Override

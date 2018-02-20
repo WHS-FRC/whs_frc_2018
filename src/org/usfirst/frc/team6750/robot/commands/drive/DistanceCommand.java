@@ -37,6 +37,6 @@ public abstract class DistanceCommand extends Command {
 	}
 
 	public boolean timeUp() {
-		return distance > 0 ? (counter.getDistance() > distance) : counter.getDistance() < distance;
+		return counter.getDistance() >= distance;
 	}
 }

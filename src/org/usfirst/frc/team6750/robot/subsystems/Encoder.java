@@ -142,4 +142,8 @@ public class Encoder {
 			return (spokes / SPOKE_COUNT) * WHEEL_CIRCUMFERENCE;
 		}
 	}
+	
+	public static double spokesToDistance(double spokes) {
+		return (spokes / SPOKE_COUNT) * WHEEL_CIRCUMFERENCE;
+	}
 }
