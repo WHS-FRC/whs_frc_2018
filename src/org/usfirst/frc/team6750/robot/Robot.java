@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team6750.robot;
 
+import org.usfirst.frc.team6750.robot.commands.drive.DegreeRotateCommand;
 import org.usfirst.frc.team6750.robot.subsystems.Arm;
 import org.usfirst.frc.team6750.robot.subsystems.BoxIntake;
 import org.usfirst.frc.team6750.robot.subsystems.Drivetrain;
@@ -62,6 +63,7 @@ public class Robot extends TimedRobot {
 
 	private void addSDBVariables() {
 		SmartDashboard.putString("Robot Position", "CENTER");
+		SmartDashboard.putNumber("Inches per Degree", (414.69D / (5D * 360D)));
 	}
 
 	/**
@@ -120,6 +122,10 @@ public class Robot extends TimedRobot {
 
 		SmartDashboard.putNumber("Distance", counter.getDistance());
 		SmartDashboard.putNumber("Spokes", counter.getSpokes());
+		
+		DegreeRotateCommand.INCHES_PER_DEGREE = SmartDashboard.getNumber("Inches per Degree", (414.69D / (5D * 360D)));
+
+		System.out.println("IPD: " + DegreeRotateCommand.INCHES_PER_DEGREE);
 	}
 
 	/**
@@ -135,6 +141,7 @@ public class Robot extends TimedRobot {
 		delta = timer.get();
 
 		Scheduler.getInstance().run();
+		
 
 		if(!this.isAutonomous() && commands.autoCommand.isRunning()) {
 			commands.autoCommand.cancel();

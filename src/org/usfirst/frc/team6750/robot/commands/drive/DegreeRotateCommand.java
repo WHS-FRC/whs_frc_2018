@@ -4,7 +4,7 @@ import org.usfirst.frc.team6750.robot.Robot;
 import org.usfirst.frc.team6750.robot.subsystems.Encoder;
 
 public class DegreeRotateCommand extends DistanceCommand {
-	public static final double INCHES_PER_DEGREE = (414.69D / (5D * 360D));
+	public static double INCHES_PER_DEGREE = (414.69D / (5D * 360D));
 	
 	public final double speed;
 
