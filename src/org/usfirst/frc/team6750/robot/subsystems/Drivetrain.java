@@ -66,8 +66,8 @@ public class Drivetrain extends Subsystem {
 	private void arcadeDrive() {
 		Joystick js = Robot.oi.ltJS;
 
-		double rotAxis = js.getRawAxis(2),
-				moveAxis = -js.getRawAxis(3); // Axis is inverted
+		double rotAxis = js.getRawAxis(0),
+				moveAxis = -js.getRawAxis(1); // Axis is inverted
 
 		rotAxis *= 0.65D;
 		moveAxis *= 0.65D;
