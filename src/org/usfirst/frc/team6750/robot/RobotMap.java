@@ -21,10 +21,10 @@ public class RobotMap {
 	public static final int DT_RIGHT_BACK = 5;
 
 	//BI = box intake
-	public static final int BI_LEFT = 6;
+	public static final int BI_LEFT = 8;
 	public static final int BI_RIGHT = 7;
 
-	public static final int ARM_LEFT = 8;
+	public static final int ARM_LEFT = 6;
 	public static final int ARM_RIGHT = 9;
 
 	//W = winch
