@@ -11,9 +11,11 @@ public class Winch extends Subsystem {
 	public final Spark left,
 			right;
 
+	public double speed = 0D;
+
 	public Winch() {
 		super();
-		
+
 		left = new Spark(RobotMap.W_LEFT);
 		right = new Spark(RobotMap.W_RIGHT);
 	}
@@ -22,9 +24,21 @@ public class Winch extends Subsystem {
 	public void periodic() {
 		Joystick js = Robot.oi.ltJS;
 
-		double axis = js.getRawAxis(1);
+		if(js.getRawButtonReleased(7)) {
+			if(speed != -1D) {
+				speed = -1D;
+			} else {
+				speed = 0D;
+			}
+		} else if(js.getRawButtonReleased(8)) {
+			if(speed != 1D) {
+				speed = 1D;
+			} else {
+				speed = 0D;
+			}
+		}
 		
-		setSpeed(axis);
+		setSpeed(speed);
 	}
 
 	@Override
