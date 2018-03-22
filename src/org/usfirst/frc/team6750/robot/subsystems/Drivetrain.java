@@ -21,8 +21,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * An example subsystem. You can replace me with your own Subsystem.
  */
 public class Drivetrain extends Subsystem {
-	public static final double BRAKE_MULT = 0.75D;
-
 	public final Spark leftFront,
 			leftBack,
 			rightFront,
@@ -32,9 +30,6 @@ public class Drivetrain extends Subsystem {
 			right;
 
 	public final DifferentialDrive drive;
-
-	private double lastRot = 0D,
-			lastMove = 0D;
 
 	public final Encoder encoder;
 
@@ -73,9 +68,6 @@ public class Drivetrain extends Subsystem {
 		moveAxis *= 0.65D;
 
 		drive.arcadeDrive(moveAxis, rotAxis);
-
-		lastRot = rotAxis;
-		lastMove = moveAxis;
 	}
 
 	@Override
@@ -113,37 +105,5 @@ public class Drivetrain extends Subsystem {
 	public void driveRight(double speed) {
 		rightFront.setSpeed(speed);
 		rightBack.setSpeed(speed);
-	}
-
-	/**
-	 * Called during periodic to slow the motors to a stop instead of abruptly
-	 * setting to 0 Done by multiplying motor speeds by the BRAKE_MULT constant,
-	 * which is < 1.0D
-	 */
-	public void periodicBrake() {
-		brake(leftFront);
-		brake(leftBack);
-		brake(rightFront);
-		brake(rightBack);
-	}
-
-	/**
-	 * Used to slow down a given motor until it reaches 0 Rate at which is slows
-	 * down the motor can be adjusted by changing the BRAKE_MULT constant
-	 * 
-	 * @param motor
-	 */
-	private void brake(Spark motor) {
-		double speed = motor.getSpeed();
-
-		if(speed == 0D) {
-			return;
-		} else if(speed < 0.1D) {
-			speed = 0D;
-		} else {
-			speed -= Robot.delta * (speed * BRAKE_MULT);
-		}
-
-		motor.setSpeed(speed);
 	}
 }
