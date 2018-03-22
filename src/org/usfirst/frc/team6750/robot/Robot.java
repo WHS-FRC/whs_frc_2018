@@ -47,7 +47,7 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		drivetrain = new Drivetrain();
 		
-		//boxIntake = new BoxIntake();
+		boxIntake = new BoxIntake();
 		arm = new Arm();
 		winch = new Winch();
 
