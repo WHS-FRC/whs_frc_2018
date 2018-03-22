@@ -17,9 +17,15 @@ public class Arm extends Subsystem {
 
 	@Override
 	public void periodic() {
-		double moveAxis = Robot.oi.ltJS.getRawAxis(3);
+		double moveAxis = -Robot.oi.ltJS.getRawAxis(3);
 		
-		setSpeed(moveAxis * 0.75D);
+		if(moveAxis > 0) {
+			moveAxis *= 0.75D;
+		} else {
+			moveAxis *= 0.45D;
+		}
+		
+		setSpeed(moveAxis);
 	}
 
 	@Override
