@@ -33,6 +33,8 @@ public class Drivetrain extends Subsystem {
 
 	public final Encoder encoder;
 
+	public boolean slow = false;
+	
 	public Drivetrain() {
 		super();
 
@@ -60,12 +62,16 @@ public class Drivetrain extends Subsystem {
 
 	private void arcadeDrive() {
 		Joystick js = Robot.oi.ltJS;
+		
+		if(js.getRawButtonReleased(1)) {
+			slow = !slow;
+		}
 
 		double rotAxis = js.getRawAxis(0),
 				moveAxis = -js.getRawAxis(1); // Axis is inverted
 
-		rotAxis *= 0.65D;
-		moveAxis *= 0.65D;
+		rotAxis *= slow ? 0.5D : 1D;
+		moveAxis *= slow ? 0.5D : 1D;
 
 		drive.arcadeDrive(moveAxis, rotAxis);
 	}
