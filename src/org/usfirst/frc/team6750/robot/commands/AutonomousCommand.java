@@ -1,5 +1,7 @@
 package org.usfirst.frc.team6750.robot.commands;
 
+import org.usfirst.frc.team6750.robot.auto.AutonomousConfiguration;
+import org.usfirst.frc.team6750.robot.auto.AutonomousConfiguration.Position;
 import org.usfirst.frc.team6750.robot.commands.drive.DegreeRotateCommand;
 import org.usfirst.frc.team6750.robot.commands.drive.DistanceDriveCommand;
 
@@ -7,9 +9,15 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutonomousCommand extends CommandGroup {
 	public AutonomousCommand() {
-		//AutonomousConfiguration autoCfg = new AutonomousConfiguration();
+		AutonomousConfiguration autoCfg = new AutonomousConfiguration();
 
-		this.addSequential(new DistanceDriveCommand(0.25D, 48));
+		if(autoCfg.robotPos == Position.CENTER) {
+			this.addSequential(new DegreeRotateCommand(0.25D, -90));
+			this.addSequential(new DistanceDriveCommand(0.25D, 64));
+			this.addSequential(new DegreeRotateCommand(0.25D, 90));
+		}
+
+		this.addSequential(new DistanceDriveCommand(0.25D, 96));
 
 		/**
 		 * if(autoCfg.robotPos == autoCfg.scale1) {
