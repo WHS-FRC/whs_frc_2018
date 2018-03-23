@@ -12,12 +12,14 @@ public class AutonomousCommand extends CommandGroup {
 		AutonomousConfiguration autoCfg = new AutonomousConfiguration();
 
 		if(autoCfg.robotPos == Position.CENTER) {
+			this.addSequential(new DistanceDriveCommand(0.25D, 54));
 			this.addSequential(new DegreeRotateCommand(0.25D, -90));
-			this.addSequential(new DistanceDriveCommand(0.25D, 64));
+			this.addSequential(new DistanceDriveCommand(0.25D, 126));
 			this.addSequential(new DegreeRotateCommand(0.25D, 90));
+			this.addSequential(new DistanceDriveCommand(0.25D, 100));
+		} else {
+			this.addSequential(new DistanceDriveCommand(0.25D, 140));
 		}
-
-		this.addSequential(new DistanceDriveCommand(0.25D, 96));
 
 		/**
 		 * if(autoCfg.robotPos == autoCfg.scale1) {
