@@ -70,8 +70,8 @@ public class Drivetrain extends Subsystem {
 		double rotAxis = js.getRawAxis(0),
 				moveAxis = -js.getRawAxis(1); // Axis is inverted
 
-		rotAxis *= slow ? 0.5D : 1D;
-		moveAxis *= slow ? 0.5D : 1D;
+		rotAxis *= slow ? 0.7D : 0.85D;
+		moveAxis *= slow ? 0.7D : 0.85D;
 
 		drive.arcadeDrive(moveAxis, rotAxis);
 	}
