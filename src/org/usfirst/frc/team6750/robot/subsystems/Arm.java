@@ -20,7 +20,7 @@ public class Arm extends Subsystem {
 		double moveAxis = -Robot.oi.ltJS.getRawAxis(3);
 		
 		if(moveAxis > 0) {
-			moveAxis *= 0.75D;
+			moveAxis *= 1D;
 		} else {
 			moveAxis *= 0.45D;
 		}
