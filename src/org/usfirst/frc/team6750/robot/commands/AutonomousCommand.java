@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutonomousCommand extends CommandGroup {
 	public AutonomousCommand() {
-		AutonomousConfiguration autoCfg = new AutonomousConfiguration();
-
+		//AutonomousConfiguration autoCfg = new AutonomousConfiguration();
+		/**
 		if(autoCfg.robotPos == Position.CENTER) {
 			this.addSequential(new DistanceDriveCommand(0.25D, 54));
 			this.addSequential(new DegreeRotateCommand(0.25D, -90));
@@ -18,8 +18,11 @@ public class AutonomousCommand extends CommandGroup {
 			this.addSequential(new DegreeRotateCommand(0.25D, 90));
 			this.addSequential(new DistanceDriveCommand(0.25D, 100));
 		} else {
-			this.addSequential(new DistanceDriveCommand(0.25D, 140));
 		}
+		
+		**/
+		
+		this.addSequential(new DistanceDriveCommand(0.25D, 160));
 
 		/**
 		 * if(autoCfg.robotPos == autoCfg.scale1) {
